@@ -8,6 +8,7 @@ use App\Domain\Orders\Enum\OrdersStatusEnum;
 use App\Domain\Orders\Repository\OrdersRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Brick\Money\Money;
 
 #[ORM\Table(name: 'orders')]
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
@@ -86,7 +87,7 @@ class Orders
         return $this->status;
     }
 
-    public function setStatus(): self
+    public function setStatus(): OrdersStatusEnum
     {
         return $this->status;
     }

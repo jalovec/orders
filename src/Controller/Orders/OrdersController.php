@@ -12,11 +12,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrdersController extends AbstractController
 {
+    private OrdersService $ordersService;
 
     public function __construct(
         OrdersService $ordersService
     )
     {
+        $this->ordersService = $ordersService;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    #[Route('/orders', name: 'getOrders', methods: ['POST'])]
+    public function createOrder(Request $request): Response
+    {
+        $this->ordersService->createOrder(
+            $request->get('customerName'),
+            (float)$request->get('totalPrice')
+        );
+
+        return $this->json(1);
     }
 
     #[Route('/orders', name: 'getOrders', methods: ['GET'])]
@@ -48,17 +64,6 @@ class OrdersController extends AbstractController
         ]);
     }
 
-    #[Route('/orders', name: 'getOrders', methods: ['POST'])]
-    public function createOrder(Request $request): Response
-    {
-        $this->ordersService->createOrder(
-            $request->get('customerName'),
-            $request->get('totalPrice')
-        );
-
-        return $this->json(1);
-    }
-
     #[Route('/orders/{id}', name: 'getOrder', methods: ['GET'])]
     public function getOrder(int $id): Response
     {
@@ -83,7 +88,7 @@ class OrdersController extends AbstractController
         $this->ordersService->updateOrder(
             $id,
             $request->get('status'),
-            $request->get('totalPrice')
+            (float)$request->get('totalPrice')
         );
 
         return $this->json(1);

@@ -36,13 +36,13 @@
                 <tr>
                     <td>{{ order.id }}</td>
                     <td>{{ order.customerName }}</td>
-                    <td>{{ order.status }}</td>
-                    <td>{{ order.orderDate }}</td>
+                    <td>{{ order.status.value }}</td>
+                    <td>{{ order.orderDate|date("d. m. Y H:i:s") }}</td>
                     <td>{{ order.totalPrice }}
                     </td>
                     <td>
-                        <a href="/edit/{{ book.id }}-{{ book.firstName }}">EDIT</a>
-                        <a href="/delete/{{ book.id }}" onClick="JavaScript:return window.confirm('Sure to delete?');">DELETE</a>
+                        <a href="/edit/">EDIT</a>
+                        <a href="/delete/" onClick="JavaScript:return window.confirm('Sure to delete?');">DELETE</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -55,10 +55,7 @@
                     </font></td>
             </tr>
         </TABLE>
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
         <INPUT type="submit" value="ADD CONTACT">
-        {{ form_end(form) }}
     </center>
 
 

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\Orders\Dto;
 
 use App\Domain\Orders\Enum\OrdersStatusEnum;
+use App\Entity\Orders\Orders;
 
 class OrdersDto
 {
     public function __construct(
         public readonly int                $id,
         public readonly string             $customerName,
-        public readonly \DateTimeImmutable $orderDate,
+        public readonly \DateTime          $orderDate,
         public readonly OrdersStatusEnum   $status,
         public readonly float              $totalPrice,
     )

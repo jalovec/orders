@@ -38,6 +38,14 @@ services:
     networks:
       - symfony
 
+  adminer:
+    image: adminer
+    container_name: adminer
+    ports:
+      - "2060:8080"
+    networks:
+      - symfony
+
 networks:
   symfony:
 

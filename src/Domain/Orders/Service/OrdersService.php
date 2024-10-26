@@ -13,10 +13,13 @@ use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 #[Autoconfigure(lazy: true)]
 class OrdersService
 {
+    private OrdersRepository $ordersRepository;
+
     public function __construct(
         OrdersRepository $ordersRepository
     )
     {
+        $this->ordersRepository = $ordersRepository;
     }
 
     /**
@@ -37,7 +40,7 @@ class OrdersService
     /**
      * @throw \Exception
      */
-    public function getOrder(int $id): array
+    public function getOrder(int $id): OrdersDto
     {
         $order = $this->ordersRepository->doFind($id);
 
@@ -56,7 +59,7 @@ class OrdersService
     }
 
     /**
-     * @throw \Exception
+     * @throws \Exception
      */
     public function updateOrder(
         int               $id,
@@ -65,9 +68,9 @@ class OrdersService
     ): bool
     {
         $order = $this->ordersRepository->doFind($id);
-        if ($status) {
-            $order->setStatus($status);
-        }
+//        if ($status) {
+//            $order->setStatus($status);
+//        }
         if ($totalPrice) {
             $order->setTotalPrice($totalPrice);
         }
@@ -83,20 +86,18 @@ class OrdersService
     public function createOrder(
         string $customerName,
         float  $totalPrice
-    ): bool
+    ): void
     {
         try {
-            $order = new Orders(
-                $customerName,
-                new DateTime(),
-                OrdersStatusEnum::NEW,
-                $totalPrice
-            );
-            $this->ordersRepository->save($order, true);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-
-        return true;
+        $order = new Orders(
+            $customerName,
+            new \DateTime(),
+            OrdersStatusEnum::NEW,
+            $totalPrice
+        );
+        $this->ordersRepository->save($order, true);
+    } catch (\Exception $e) {
+        echo $e->getMessage();
+    }
     }
 }

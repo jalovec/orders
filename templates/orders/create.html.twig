@@ -24,18 +24,18 @@
             <tr>
                 <td width="100%" colspan="2"><font face='Arial' size='5'>Order create</font></td>
             </tr>
-            {%  if method === 'post' %}
+            {% if method is same as('post') %}
                 <tr>
                     <th>Customer Name</th>
                     <td><INPUT type="text" name="customerName" id="customerName" value="{% if order is defined %}{{ order.customerName }}{% endif %}"></td>
                 </tr>
-            {%  endif %}
-            {%  if method === 'put' %}
+            {% endif %}
+            {% if method is same as('put') %}
                 <tr>
                     <th>Status</th>
                     <td><INPUT type="text" name="status" id="status" value="{% if order is defined %}{{ order.staus.value }}{% endif %}"></td>
                 </tr>
-            {%  endif %}
+            {% endif %}
             <tr>
                 <th>Total price</th>
                 <td><INPUT type="text" name="totalPrice" id="totalPrice" value="{% if order is defined %}{{ order.totalPrice }}{% endif %}"> CZK</td>
