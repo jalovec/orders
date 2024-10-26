@@ -1,7 +1,7 @@
 DOCKER_DIR=docker
 
 up:
-	composer install
+	@composer install
 
 install:
 	@cd ${DOCKER_DIR} && docker compose up -d --build && \
