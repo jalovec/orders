@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders{% endblock %}
+
+{% block body %}
+
+
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+    <center>
+        <TABLE width="70%" border="1">
+            <tr>
+                <td width="100%" colspan="6"><font face='Arial' size='5'>Orders</font></td>
+            </tr>
+
+            <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Status</th>
+                <th>Order date</th>
+                <th>Total price</th>
+                <th></th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customerName }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.orderDate }}</td>
+                    <td>{{ order.totalPrice }}
+                    </td>
+                    <td>
+                        <a href="/edit/{{ book.id }}-{{ book.firstName }}">EDIT</a>
+                        <a href="/delete/{{ book.id }}" onClick="JavaScript:return window.confirm('Sure to delete?');">DELETE</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </TABLE>
+        <br><br>
+        <TABLE width="70%" border="0">
+            <tr>
+                <td width="100%" colspan="6"><font face='Arial' size='5'>
+                        <center>Přidej kontakt</center>
+                    </font></td>
+            </tr>
+        </TABLE>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <INPUT type="submit" value="ADD CONTACT">
+        {{ form_end(form) }}
+    </center>
+
+
+{% endblock %}
