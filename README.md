@@ -9,7 +9,7 @@
 - after application clone is in folder
 - go to folder orders `cd orders`
 - run command `make create` that create docker containers
-- run command make `db-diff` to be sure all migrations are ready
-- run command make `db-migrate` to create database
+- run command `make db-diff` to be sure all migrations are ready
+- run command `make db-migrate` to create database
 - you can use te application at http://localhost:8000
 - register your user and start
